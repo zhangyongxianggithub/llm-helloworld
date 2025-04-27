@@ -32,13 +32,19 @@ functions = [
 ]
 question = "I need the top 2 products where the price is lower than 50"
 messages = [{"role": "user", "content": question}]
-response = client.chat.completions.create(messages=messages, functions=functions, model="gpt-4o-mini")
+response = client.chat.completions.create(
+    messages=messages, functions=functions, model="gpt-4o-mini"
+)
 print(response.to_json())
 function_args = json.loads(response.choices[0].message.function_call.arguments)
 messages.append(json.loads(response.choices[0].message.to_json()))
 products = find_product(function_args["sql_query"])
-messages.append({
-    "role": "function", "content": json.dumps(products), "name": "find_product",
-})
+messages.append(
+    {
+        "role": "function",
+        "content": json.dumps(products),
+        "name": "find_product",
+    }
+)
 response1 = client.chat.completions.create(messages=messages, model="gpt-4o-mini")
 print(response1.to_json())
