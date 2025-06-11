@@ -1,3 +1,5 @@
+import sys
+
 from openai_base import client
 
 chat_completion = client.chat.completions.create(
@@ -10,3 +12,5 @@ chat_completion = client.chat.completions.create(
     model="gpt-3.5-turbo",
 )
 print(chat_completion.to_json())
+
+print(sys.path)
