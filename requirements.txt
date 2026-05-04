@@ -14,3 +14,4 @@ langchain-core
 langchain-openai
 langchain_community
 wikipedia
+faiss-cpu
